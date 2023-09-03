@@ -41,6 +41,7 @@ const server = http.createServer((req, res) => {
   //overview
   if (pathname === "/" || pathname === "/overview") {
     res.writeHead(200, { "Content-Type": "text/html" });
+
     const cardsTemp = dataObj
       .map((el) => replaceTemplate(tempCard, el))
       .join("");
@@ -50,7 +51,12 @@ const server = http.createServer((req, res) => {
 
     //product
   } else if (pathname === "/product") {
-    res.end;
+    res.writeHead(200, { "Content-Type": "text/html" });
+
+    const product = dataObj[query.id];
+    const result = replaceTemplate(tempProduct, product);
+
+    res.end(result);
   }
 
   // api
